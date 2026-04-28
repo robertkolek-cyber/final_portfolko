@@ -167,6 +167,40 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
+function AsciiSignal() {
+  return (
+    <div className="ascii-card" aria-hidden="true">
+      <div className="ascii-topline">
+        <span>system sketch</span>
+        <span>live</span>
+      </div>
+      <div className="ascii-stage">
+        <pre className="ascii-frame frame-a">{`complexity
+
+  ?---x---?
+  |   |   |
+  x---?---x
+
+signals: scattered`}</pre>
+        <pre className="ascii-frame frame-b">{`mapping states
+
+  input -> rule
+          -> edge
+          -> risk
+
+signals: grouped`}</pre>
+        <pre className="ascii-frame frame-c">{`clarity
+
+  input  -> decision
+  state  -> next step
+  risk   -> checkpoint
+
+signals: usable`}</pre>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main>
@@ -203,6 +237,7 @@ export default function Home() {
                 <dd>@SkodaAuto</dd>
               </div>
             </dl>
+            <AsciiSignal />
           </aside>
         </section>
       </header>
