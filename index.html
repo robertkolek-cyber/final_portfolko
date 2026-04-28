@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Robert Kolek - Product Designer</title>
+    <meta
+      name="description"
+      content="I turn complexity into clarity. Portfolio of Robert Kolek, product designer."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f2f2f0;
+        --panel: #ffffff;
+        --muted: #d8d8d6;
+        --line: #c9c9c5;
+        --ink: #20201d;
+        --soft: #7b7b74;
+        --blue: #246bff;
+        --green: #2e766e;
+        --pink: #ffafe3;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Space Mono", "Courier New", monospace;
+        letter-spacing: 0;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wrap {
+        width: min(100% - 2rem, 61rem);
+        margin: 0 auto;
+      }
+
+      .hero {
+        padding: clamp(1rem, 3vw, 2rem) 0 2rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 2.1fr) minmax(12rem, 0.9fr);
+        gap: clamp(0.9rem, 2vw, 1.5rem);
+      }
+
+      .hero-copy,
+      .pill-row {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .pill-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pill {
+        min-height: 4.4rem;
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        background: var(--panel);
+        border: 1px solid rgba(32, 32, 29, 0.04);
+        border-radius: 0.8rem;
+        font-size: clamp(0.86rem, 1.5vw, 1rem);
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .claim {
+        font-size: clamp(1rem, 2vw, 1.35rem);
+      }
+
+      .blue {
+        color: var(--blue);
+      }
+
+      .green {
+        color: var(--green);
+      }
+
+      .motion {
+        min-height: 12.25rem;
+        display: grid;
+        place-items: center;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        border-radius: 999px;
+        background: var(--panel);
+        border: 1px solid rgba(32, 32, 29, 0.04);
+        font-weight: 700;
+        transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+      }
+
+      .motion::before {
+        content: "";
+        position: absolute;
+        inset: 1.15rem;
+        border: 1px solid rgba(32, 32, 29, 0.08);
+        border-radius: inherit;
+        transform: scaleX(0.72);
+        animation: breathe 3.2s var(--ease) infinite;
+        z-index: -1;
+      }
+
+      .motion:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 35px rgba(32, 32, 29, 0.06);
+      }
+
+      .projects {
+        padding: 1.45rem 0 5rem;
+      }
+
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .section-title {
+        margin-bottom: 3.5rem;
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        font-weight: 700;
+      }
+
+      .timeline,
+      .cv-timeline {
+        position: relative;
+      }
+
+      .timeline::before,
+      .cv-timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 2rem;
+        bottom: 2rem;
+        width: 1px;
+        transform: translateX(-50%);
+        background: var(--line);
+      }
+
+      .row,
+      .cv-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 6rem minmax(0, 1fr);
+        align-items: center;
+        position: relative;
+      }
+
+      .row {
+        min-height: clamp(14rem, 29vw, 20rem);
+      }
+
+      .cell {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .left-card {
+        justify-content: flex-start;
+      }
+
+      .right-card {
+        justify-content: flex-end;
+      }
+
+      .left-year {
+        justify-content: flex-end;
+        padding-right: 0.35rem;
+      }
+
+      .right-year {
+        justify-content: flex-start;
+        padding-left: 0.35rem;
+      }
+
+      .axis {
+        display: flex;
+        justify-content: center;
+        z-index: 1;
+      }
+
+      .axis span {
+        display: block;
+        width: 2.15rem;
+        height: 2.15rem;
+        border-radius: 999px;
+        border: 2px solid var(--line);
+        background: var(--bg);
+      }
+
+      .year {
+        font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+        font-weight: 700;
+      }
+
+      .card {
+        width: min(100%, 22.8rem);
+        min-height: clamp(12rem, 21vw, 16rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.75rem;
+        padding: clamp(1.15rem, 2.4vw, 1.65rem);
+        background: var(--panel);
+        border-radius: 0.85rem;
+        border: 1px solid rgba(32, 32, 29, 0.04);
+        transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 18px 35px rgba(32, 32, 29, 0.07);
+      }
+
+      .card h3 {
+        max-width: 18rem;
+        font-size: clamp(0.78rem, 1.3vw, 0.95rem);
+        line-height: 1.35;
+        font-weight: 700;
+      }
+
+      .card p {
+        margin-top: auto;
+        color: #85857e;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .mobile-year {
+        display: none;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+
+      .tag,
+      .email {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: var(--pink);
+        color: var(--blue);
+        font-size: 0.72rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .tag {
+        min-height: 1.55rem;
+        padding: 0.26rem 1.05rem;
+      }
+
+      .more {
+        margin-top: 3.75rem;
+        text-align: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      .more a,
+      .socials a {
+        color: var(--blue);
+      }
+
+      .contact,
+      .protocol {
+        background: var(--muted);
+      }
+
+      .contact-inner {
+        min-height: 25rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4.1rem 0;
+      }
+
+      .contact p,
+      .contact h2,
+      .center-title p,
+      .center-title h2,
+      .protocol h2 {
+        font-size: clamp(0.95rem, 2vw, 1.15rem);
+        font-weight: 700;
+      }
+
+      .contact h2 {
+        margin-top: 2rem;
+      }
+
+      .email {
+        min-height: 2.1rem;
+        margin-top: 2rem;
+        padding: 0.45rem 1.5rem;
+        font-size: 0.78rem;
+      }
+
+      .socials {
+        margin-top: 2.45rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: clamp(1.4rem, 5vw, 4rem);
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .cv {
+        padding: 6.5rem 0 7rem;
+      }
+
+      .center-title {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .center-title h2 {
+        margin-top: 0.9rem;
+      }
+
+      .cv-timeline::before {
+        top: 1rem;
+        bottom: 1rem;
+        background: #d4d4d0;
+      }
+
+      .cv-row {
+        min-height: clamp(15rem, 24vw, 19rem);
+        align-items: start;
+      }
+
+      .cv-card {
+        max-width: 23rem;
+      }
+
+      .cv-card h3 {
+        text-transform: uppercase;
+        font-size: clamp(1rem, 1.7vw, 1.25rem);
+        line-height: 1.2;
+      }
+
+      .cv-card p {
+        margin-top: 0.55rem;
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .cv-card .role {
+        margin-top: 0.85rem;
+        color: #5c5c56;
+        font-size: 0.82rem;
+      }
+
+      .cv-card ul {
+        margin: 0.6rem 0 0;
+        padding-left: 1rem;
+      }
+
+      .cv-card li {
+        margin: 0.28rem 0;
+        font-size: 0.74rem;
+        line-height: 1.32;
+        font-weight: 700;
+      }
+
+      .protocol-inner {
+        min-height: 24rem;
+        padding: 4.25rem 0;
+      }
+
+      .protocol h2 {
+        text-align: center;
+      }
+
+      .protocol-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 5.3rem;
+      }
+
+      .protocol-grid p {
+        min-height: 8rem;
+        padding: 1.15rem;
+        background: rgba(255, 255, 255, 0.24);
+        border: 1px solid rgba(32, 32, 29, 0.06);
+        border-radius: 0.75rem;
+        font-size: 0.8rem;
+        line-height: 1.45;
+        font-weight: 700;
+      }
+
+      .protocol-grid span {
+        display: block;
+        margin-bottom: 1.2rem;
+        color: var(--soft);
+      }
+
+      @keyframes breathe {
+        0%,
+        100% {
+          opacity: 0.25;
+          transform: scaleX(0.72) scaleY(0.86);
+        }
+
+        50% {
+          opacity: 0.7;
+          transform: scaleX(0.9) scaleY(0.96);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .motion {
+          min-height: 8.5rem;
+        }
+
+        .pill {
+          min-height: 3.95rem;
+          padding-inline: 1rem;
+        }
+
+        .timeline::before,
+        .cv-timeline::before {
+          left: 1.35rem;
+          top: 0;
+          bottom: 0;
+        }
+
+        .row,
+        .cv-row {
+          min-height: auto;
+          grid-template-columns: 2.7rem minmax(0, 1fr);
+          margin-bottom: 1.8rem;
+          align-items: start;
+        }
+
+        .axis {
+          grid-column: 1;
+          grid-row: 1;
+          justify-content: center;
+          padding-top: 0.35rem;
+        }
+
+        .axis span {
+          width: 1.45rem;
+          height: 1.45rem;
+        }
+
+        .cell {
+          grid-column: 2;
+          grid-row: 1;
+        }
+
+        .year-cell,
+        .empty {
+          display: none;
+        }
+
+        .left-card,
+        .right-card {
+          justify-content: stretch;
+        }
+
+        .card {
+          width: 100%;
+          min-height: 12.8rem;
+        }
+
+        .mobile-year {
+          display: inline-block;
+          color: var(--soft);
+          font-size: 0.78rem;
+          font-weight: 700;
+        }
+
+        .cv {
+          padding-top: 5rem;
+        }
+
+        .center-title {
+          margin-bottom: 3rem;
+        }
+
+        .cv-card {
+          max-width: none;
+        }
+
+        .protocol-grid {
+          grid-template-columns: 1fr;
+          margin-top: 3rem;
+        }
+
+        .protocol-inner {
+          min-height: auto;
+        }
+      }
+
+      @media (max-width: 430px) {
+        .pill-row {
+          gap: 0.6rem;
+        }
+
+        .pill {
+          font-size: 0.76rem;
+          border-radius: 0.65rem;
+        }
+
+        .claim {
+          font-size: 0.86rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <div class="pill claim">I turn complexity into clarity.</div>
+            <div class="pill-row">
+              <div class="pill">Robert Kolek</div>
+              <div class="pill">product designer</div>
+            </div>
+            <div class="pill-row">
+              <div class="pill blue">currently @ESET</div>
+              <div class="pill green">previously @SkodaAuto</div>
+            </div>
+          </div>
+          <a class="motion" href="#projects">Animation</a>
+        </div>
+      </section>
+
+      <section id="projects" class="wrap projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="timeline">
+          <div class="row">
+            <div class="cell year-cell left-year"><span class="year">2026</span></div>
+            <div class="axis"><span></span></div>
+            <div class="cell right-card">
+              <article class="card">
+                <span class="mobile-year">2026</span>
+                <h3>Refresh of Data School Website</h3>
+                <p>2 months</p>
+                <div class="tags"><span class="tag">AI driven</span></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="cell left-card">
+              <article class="card">
+                <span class="mobile-year">2025</span>
+                <h3>Cloud workload protection module in enterprise product</h3>
+                <p>12 months</p>
+                <div class="tags"><span class="tag">@ESET</span><span class="tag">B2B</span></div>
+              </article>
+            </div>
+            <div class="axis"><span></span></div>
+            <div class="cell year-cell right-year"><span class="year">2025</span></div>
+          </div>
+
+          <div class="row">
+            <div class="cell year-cell left-year"><span class="year">2024</span></div>
+            <div class="axis"><span></span></div>
+            <div class="cell right-card">
+              <article class="card">
+                <span class="mobile-year">2024</span>
+                <h3>Skoda EcoShift app</h3>
+                <p>4 months</p>
+                <div class="tags"><span class="tag">internship</span><span class="tag">app</span></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="cell left-card">
+              <article class="card">
+                <span class="mobile-year">2024</span>
+                <h3>Codebridge College</h3>
+                <p>2 months</p>
+                <div class="tags"><span class="tag">start-up</span><span class="tag">branding</span></div>
+              </article>
+            </div>
+            <div class="axis"><span></span></div>
+            <div class="cell year-cell right-year"><span class="year">2024</span></div>
+          </div>
+
+          <div class="row">
+            <div class="cell year-cell left-year"><span class="year">2022</span></div>
+            <div class="axis"><span></span></div>
+            <div class="cell right-card">
+              <article class="card">
+                <span class="mobile-year">2022</span>
+                <h3>Healthapp</h3>
+                <p>48 hours</p>
+                <div class="tags"><span class="tag">hackathon</span></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="cell left-card">
+              <article class="card">
+                <span class="mobile-year">2022</span>
+                <h3>Bratislava app</h3>
+                <p>48 hours</p>
+                <div class="tags"><span class="tag">hackathon</span></div>
+              </article>
+            </div>
+            <div class="axis"><span></span></div>
+            <div class="cell year-cell right-year"><span class="year">2022</span></div>
+          </div>
+        </div>
+        <p class="more">
+          more projects on
+          <a href="https://www.behance.net/robertkolek" target="_blank" rel="noreferrer">Behance</a>
+        </p>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="wrap contact-inner">
+          <p>Got project in mind?</p>
+          <h2>Lets talk!</h2>
+          <a class="email" href="mailto:robert.kolek98@gmail.com">robert.kolek98@gmail.com</a>
+          <div class="socials">
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://www.behance.net/robertkolek" target="_blank" rel="noreferrer">Behance</a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap cv">
+        <div class="center-title">
+          <p>My CV</p>
+          <h2>Corporations</h2>
+        </div>
+        <div class="cv-timeline">
+          <div class="cv-row">
+            <div class="cell left-card">
+              <article class="cv-card">
+                <h3>ESET cybersecurity</h3>
+                <p>full time since 07/24</p>
+                <p class="role">Product designer</p>
+                <ul>
+                  <li>Responsible for two major projects</li>
+                  <li>Main domain B2B products for small/medium businesses</li>
+                  <li>Designing of core flows, user interfaces such as dashboards and tables</li>
+                  <li>Collaboratively iterating designs with other teams</li>
+                  <li>Validating designs through usability testing and analytics</li>
+                </ul>
+              </article>
+            </div>
+            <div class="axis"><span></span></div>
+            <div class="cell empty"></div>
+          </div>
+
+          <div class="cv-row">
+            <div class="cell empty"></div>
+            <div class="axis"><span></span></div>
+            <div class="cell right-card">
+              <article class="cv-card">
+                <h3>Skoda Auto</h3>
+                <p>16 months internship</p>
+                <p class="role">UX/UI designer</p>
+                <ul>
+                  <li>Main domain digital instrument cluster and infotainment</li>
+                  <li>Collaborating on a new app for electromobility</li>
+                  <li>Interaction proposals for the new generation of vehicles</li>
+                  <li>Diploma thesis</li>
+                  <li>UX/UI lookfeel for the concept show car</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="protocol">
+        <div class="wrap protocol-inner">
+          <h2>My protocol</h2>
+          <div class="protocol-grid">
+            <p><span>01</span>Map the system before the screen</p>
+            <p><span>02</span>Prototype the risky interaction first</p>
+            <p><span>03</span>Make handoff readable for engineers</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
