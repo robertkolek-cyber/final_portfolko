@@ -16,16 +16,15 @@
     />
     <style>
       :root {
-        color-scheme: light;
         --bg: #f2f2f0;
         --panel: #ffffff;
-        --muted: #d8d8d6;
-        --line: #c9c9c5;
         --ink: #20201d;
-        --soft: #7b7b74;
+        --muted: #74746d;
+        --line: #cfcfcb;
         --blue: #246bff;
-        --green: #2e766e;
         --pink: #ffafe3;
+        --green: #2e766e;
+        --band: #d8d8d6;
         --ease: cubic-bezier(0.16, 1, 0.3, 1);
       }
 
@@ -39,7 +38,10 @@
 
       body {
         margin: 0;
-        background: var(--bg);
+        background:
+          radial-gradient(circle at 18% 8%, rgba(255, 175, 227, 0.22), transparent 28rem),
+          radial-gradient(circle at 86% 12%, rgba(36, 107, 255, 0.12), transparent 26rem),
+          var(--bg);
         color: var(--ink);
         font-family: "Space Mono", "Courier New", monospace;
         letter-spacing: 0;
@@ -51,46 +53,94 @@
         text-decoration: none;
       }
 
-      .wrap {
-        width: min(100% - 2rem, 61rem);
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .shell,
+      .section,
+      .contact-inner,
+      .protocol-inner {
+        width: min(100% - 2rem, 72rem);
         margin: 0 auto;
       }
 
       .hero {
-        padding: clamp(1rem, 3vw, 2rem) 0 2rem;
+        padding: clamp(1rem, 2vw, 1.6rem) 0 4.5rem;
+      }
+
+      .nav {
+        min-height: 3.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: clamp(1rem, 3vw, 1.8rem);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .brand,
+      .nav div a {
+        min-height: 2.25rem;
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+      }
+
+      .brand {
+        padding: 0 0.9rem;
+        background: var(--panel);
+        border: 1px solid rgba(32, 32, 29, 0.06);
+      }
+
+      .nav div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.35rem;
+      }
+
+      .nav div a {
+        padding: 0 0.85rem;
+        color: #4f4f49;
+        transition: background 180ms var(--ease), color 180ms var(--ease);
+      }
+
+      .nav div a:hover {
+        background: var(--panel);
+        color: var(--ink);
       }
 
       .hero-grid {
         display: grid;
-        grid-template-columns: minmax(0, 2.1fr) minmax(12rem, 0.9fr);
-        gap: clamp(0.9rem, 2vw, 1.5rem);
+        grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.75fr);
+        gap: clamp(0.9rem, 2vw, 1.2rem);
       }
 
       .hero-copy,
-      .pill-row {
+      .hero-side {
         display: grid;
-        gap: 0.85rem;
-      }
-
-      .pill-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
       }
 
       .pill {
-        min-height: 4.4rem;
+        min-height: 4rem;
         display: flex;
         align-items: center;
-        padding: 1rem 1.5rem;
+        padding: 1rem 1.2rem;
         background: var(--panel);
-        border: 1px solid rgba(32, 32, 29, 0.04);
-        border-radius: 0.8rem;
-        font-size: clamp(0.86rem, 1.5vw, 1rem);
+        border: 1px solid rgba(32, 32, 29, 0.05);
+        border-radius: 0.85rem;
+        font-size: clamp(0.78rem, 1.1vw, 0.95rem);
         font-weight: 700;
-        line-height: 1.2;
+        line-height: 1.25;
       }
 
-      .claim {
-        font-size: clamp(1rem, 2vw, 1.35rem);
+      .headline {
+        min-height: 4.45rem;
+        font-size: clamp(0.95rem, 1.6vw, 1.2rem);
       }
 
       .blue {
@@ -101,50 +151,188 @@
         color: var(--green);
       }
 
-      .motion {
-        min-height: 12.25rem;
-        display: grid;
-        place-items: center;
+      .statement {
+        min-height: clamp(21rem, 42vw, 31rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: clamp(1.2rem, 4vw, 2.2rem);
+        border-radius: 1.05rem;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.44)),
+          radial-gradient(circle at 12% 14%, rgba(36, 107, 255, 0.14), transparent 18rem);
+        border: 1px solid rgba(32, 32, 29, 0.06);
+      }
+
+      .eyebrow {
+        margin: 0 0 1.15rem;
+        color: var(--blue);
+        font-size: 0.74rem;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .statement h1 {
+        max-width: 11ch;
+        margin: 0;
+        font-size: clamp(2.8rem, 8.8vw, 7.7rem);
+        line-height: 0.92;
+        font-weight: 700;
+      }
+
+      .statement > p:last-child {
+        max-width: 42rem;
+        margin: clamp(1.2rem, 3vw, 1.8rem) 0 0;
+        color: #4f4f49;
+        font-size: clamp(0.92rem, 1.4vw, 1.08rem);
+        line-height: 1.7;
+        font-weight: 700;
+      }
+
+      .signal {
+        min-height: 17rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         position: relative;
         overflow: hidden;
-        isolation: isolate;
+        padding: 1.25rem;
         border-radius: 999px;
         background: var(--panel);
-        border: 1px solid rgba(32, 32, 29, 0.04);
-        font-weight: 700;
+        border: 1px solid rgba(32, 32, 29, 0.05);
         transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
       }
 
-      .motion::before {
-        content: "";
-        position: absolute;
-        inset: 1.15rem;
-        border: 1px solid rgba(32, 32, 29, 0.08);
-        border-radius: inherit;
-        transform: scaleX(0.72);
-        animation: breathe 3.2s var(--ease) infinite;
-        z-index: -1;
+      .signal:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 35px rgba(32, 32, 29, 0.07);
       }
 
-      .motion:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 18px 35px rgba(32, 32, 29, 0.06);
+      .signal p,
+      .signal strong {
+        position: relative;
+        z-index: 1;
+        display: block;
+        text-align: center;
+        font-weight: 700;
+      }
+
+      .signal p {
+        margin: 0;
+        color: #777771;
+        font-size: 0.72rem;
+      }
+
+      .signal strong {
+        margin-top: 0.25rem;
+        font-size: 1.1rem;
+      }
+
+      .orbit {
+        position: absolute;
+        inset: 1rem;
+        border-radius: inherit;
+        border: 1px solid rgba(32, 32, 29, 0.07);
+        animation: oval-breathe 4s var(--ease) infinite;
+      }
+
+      .orbit span {
+        position: absolute;
+        width: 0.58rem;
+        height: 0.58rem;
+        border-radius: 999px;
+        background: var(--pink);
+      }
+
+      .orbit span:nth-child(1) {
+        left: 23%;
+        top: 18%;
+      }
+
+      .orbit span:nth-child(2) {
+        right: 20%;
+        top: 52%;
+        background: var(--blue);
+      }
+
+      .orbit span:nth-child(3) {
+        left: 45%;
+        bottom: 16%;
+        background: var(--green);
+      }
+
+      .proof {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.9rem;
+      }
+
+      .proof div {
+        min-height: 8.4rem;
+        padding: 1rem;
+        border-radius: 0.85rem;
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(32, 32, 29, 0.05);
+      }
+
+      .proof span,
+      .protocol-grid span {
+        display: block;
+        color: #7b7b74;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .proof strong {
+        display: block;
+        margin-top: 1.45rem;
+        font-size: 0.95rem;
+      }
+
+      .proof p {
+        margin: 0.65rem 0 0;
+        color: #676760;
+        font-size: 0.78rem;
+        line-height: 1.45;
+        font-weight: 700;
       }
 
       .projects {
-        padding: 1.45rem 0 5rem;
+        padding: 2rem 0 5.5rem;
       }
 
-      h2,
-      h3,
-      p {
+      .heading {
+        display: grid;
+        grid-template-columns: minmax(10rem, 0.38fr) minmax(0, 1fr);
+        gap: 1rem;
+        align-items: end;
+        margin-bottom: clamp(2.4rem, 6vw, 4.5rem);
+      }
+
+      .heading.center {
+        display: block;
+        text-align: center;
+      }
+
+      .heading p {
         margin: 0;
+        color: var(--blue);
+        font-size: 0.78rem;
+        font-weight: 700;
       }
 
-      .section-title {
-        margin-bottom: 3.5rem;
-        font-size: clamp(1rem, 2vw, 1.3rem);
+      .heading h2 {
+        max-width: 18ch;
+        margin: 0;
+        font-size: clamp(1.6rem, 4.4vw, 4.2rem);
+        line-height: 0.98;
         font-weight: 700;
+      }
+
+      .heading.center h2 {
+        max-width: 15ch;
+        margin: 0.9rem auto 0;
       }
 
       .timeline,
@@ -161,19 +349,19 @@
         bottom: 2rem;
         width: 1px;
         transform: translateX(-50%);
-        background: var(--line);
+        background: linear-gradient(to bottom, transparent, var(--line) 6%, var(--line) 94%, transparent);
       }
 
       .row,
       .cv-row {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 6rem minmax(0, 1fr);
-        align-items: center;
+        grid-template-columns: minmax(0, 1fr) 6.5rem minmax(0, 1fr);
         position: relative;
       }
 
       .row {
-        min-height: clamp(14rem, 29vw, 20rem);
+        min-height: clamp(26rem, 48vw, 35rem);
+        align-items: center;
       }
 
       .cell {
@@ -182,85 +370,191 @@
         align-items: center;
       }
 
-      .left-card {
+      .card-left {
         justify-content: flex-start;
       }
 
-      .right-card {
-        justify-content: flex-end;
+      .card-right {
+        justify-content: flex-start;
       }
 
-      .left-year {
+      .year-left {
         justify-content: flex-end;
         padding-right: 0.35rem;
       }
 
-      .right-year {
+      .year-right {
         justify-content: flex-start;
         padding-left: 0.35rem;
       }
 
       .axis {
         display: flex;
+        align-items: center;
         justify-content: center;
         z-index: 1;
       }
 
       .axis span {
-        display: block;
-        width: 2.15rem;
-        height: 2.15rem;
+        width: 2.45rem;
+        height: 2.45rem;
+        display: grid;
+        place-items: center;
         border-radius: 999px;
-        border: 2px solid var(--line);
+        border: 1px solid #c5c5c1;
         background: var(--bg);
+        color: #777771;
+        font-size: 0.62rem;
+        font-weight: 700;
       }
 
       .year {
-        font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+        font-size: clamp(1rem, 1.8vw, 1.25rem);
         font-weight: 700;
       }
 
-      .card {
-        width: min(100%, 22.8rem);
-        min-height: clamp(12rem, 21vw, 16rem);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 1.75rem;
-        padding: clamp(1.15rem, 2.4vw, 1.65rem);
+      .project-card {
+        width: min(100%, 29rem);
+        overflow: hidden;
         background: var(--panel);
-        border-radius: 0.85rem;
-        border: 1px solid rgba(32, 32, 29, 0.04);
+        border-radius: 1.05rem;
+        border: 1px solid rgba(32, 32, 29, 0.05);
         transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
       }
 
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 18px 35px rgba(32, 32, 29, 0.07);
+      .project-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 45px rgba(32, 32, 29, 0.08);
       }
 
-      .card h3 {
-        max-width: 18rem;
-        font-size: clamp(0.78rem, 1.3vw, 0.95rem);
-        line-height: 1.35;
+      .visual {
+        height: 12.6rem;
+        position: relative;
+        overflow: hidden;
+        background: color-mix(in srgb, var(--accent) 10%, #f5f5f2);
+      }
+
+      .visual::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-bottom: 1px solid rgba(32, 32, 29, 0.06);
+      }
+
+      .visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.02);
+        filter: saturate(0.92) contrast(0.96);
+        transition: transform 500ms var(--ease), filter 500ms var(--ease);
+      }
+
+      .project-card:hover .visual img {
+        transform: scale(1.06);
+        filter: saturate(1) contrast(1);
+      }
+
+      .abstract {
+        background:
+          linear-gradient(90deg, rgba(32, 32, 29, 0.05) 1px, transparent 1px),
+          linear-gradient(rgba(32, 32, 29, 0.05) 1px, transparent 1px),
+          color-mix(in srgb, var(--accent) 12%, #f5f5f2);
+        background-size: 28px 28px;
+      }
+
+      .abstract .line {
+        position: absolute;
+        left: 1.35rem;
+        right: 4rem;
+        top: 3rem;
+        height: 0.9rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--accent) 82%, #ffffff);
+      }
+
+      .abstract .line.short {
+        top: 5rem;
+        right: 8rem;
+        opacity: 0.45;
+      }
+
+      .abstract .chip {
+        position: absolute;
+        left: 1.35rem;
+        bottom: 1.35rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 999px;
+        background: var(--panel);
+        color: var(--accent);
+        font-size: 0.72rem;
         font-weight: 700;
       }
 
-      .card p {
-        margin-top: auto;
-        color: #85857e;
-        font-size: 0.78rem;
+      .abstract .chip.ghost {
+        left: auto;
+        right: 1.35rem;
+        color: #777771;
+      }
+
+      .body {
+        padding: clamp(1rem, 2.4vw, 1.45rem);
+      }
+
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.8rem;
+        color: #777771;
+        font-size: 0.72rem;
         font-weight: 700;
       }
 
-      .mobile-year {
-        display: none;
+      .project-card h3 {
+        margin: 1.1rem 0 0;
+        font-size: clamp(1rem, 2vw, 1.4rem);
+        line-height: 1.12;
+      }
+
+      .project-card p {
+        margin: 0.9rem 0 0;
+        color: #53534d;
+        font-size: 0.82rem;
+        line-height: 1.55;
+        font-weight: 700;
+      }
+
+      .facts {
+        display: grid;
+        gap: 0.7rem;
+        margin: 1.2rem 0 0;
+      }
+
+      .facts div {
+        display: grid;
+        grid-template-columns: 5.4rem minmax(0, 1fr);
+        gap: 0.8rem;
+        padding-top: 0.7rem;
+        border-top: 1px solid rgba(32, 32, 29, 0.08);
+      }
+
+      .facts dt,
+      .facts dd {
+        margin: 0;
+        font-size: 0.72rem;
+        line-height: 1.45;
+        font-weight: 700;
+      }
+
+      .facts dt {
+        color: #8a8a82;
       }
 
       .tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.55rem;
+        gap: 0.45rem;
+        margin-top: 1.1rem;
       }
 
       .tag,
@@ -271,21 +565,20 @@
         border-radius: 999px;
         background: var(--pink);
         color: var(--blue);
-        font-size: 0.72rem;
+        font-size: 0.67rem;
         font-weight: 700;
-        line-height: 1;
       }
 
       .tag {
-        min-height: 1.55rem;
-        padding: 0.26rem 1.05rem;
+        min-height: 1.45rem;
+        padding: 0.24rem 0.75rem;
       }
 
       .more {
-        margin-top: 3.75rem;
+        margin: 2.8rem 0 0;
         text-align: center;
         font-weight: 700;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
 
       .more a,
@@ -295,165 +588,178 @@
 
       .contact,
       .protocol {
-        background: var(--muted);
+        background:
+          radial-gradient(circle at 86% 8%, rgba(36, 107, 255, 0.12), transparent 26rem),
+          var(--band);
       }
 
       .contact-inner {
-        min-height: 25rem;
-        display: flex;
-        flex-direction: column;
+        min-height: 27rem;
+        padding: 4.2rem 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.42fr);
         align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 4.1rem 0;
-      }
-
-      .contact p,
-      .contact h2,
-      .center-title p,
-      .center-title h2,
-      .protocol h2 {
-        font-size: clamp(0.95rem, 2vw, 1.15rem);
-        font-weight: 700;
+        gap: clamp(2rem, 7vw, 6rem);
       }
 
       .contact h2 {
-        margin-top: 2rem;
+        max-width: 14ch;
+        margin: 0;
+        font-size: clamp(1.8rem, 5vw, 4.9rem);
+        line-height: 0.98;
+      }
+
+      .contact-actions {
+        display: grid;
+        gap: 1.4rem;
+        justify-items: start;
       }
 
       .email {
-        min-height: 2.1rem;
-        margin-top: 2rem;
-        padding: 0.45rem 1.5rem;
+        min-height: 2.5rem;
+        padding: 0.55rem 1.1rem;
         font-size: 0.78rem;
       }
 
       .socials {
-        margin-top: 2.45rem;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        gap: clamp(1.4rem, 5vw, 4rem);
-        font-size: 0.9rem;
+        gap: 1.25rem;
+        font-size: 0.82rem;
         font-weight: 700;
       }
 
       .cv {
-        padding: 6.5rem 0 7rem;
-      }
-
-      .center-title {
-        text-align: center;
-        margin-bottom: 4rem;
-      }
-
-      .center-title h2 {
-        margin-top: 0.9rem;
-      }
-
-      .cv-timeline::before {
-        top: 1rem;
-        bottom: 1rem;
-        background: #d4d4d0;
+        padding: 6.2rem 0 7rem;
       }
 
       .cv-row {
-        min-height: clamp(15rem, 24vw, 19rem);
+        min-height: clamp(17rem, 28vw, 23rem);
         align-items: start;
       }
 
+      .cv-card-right {
+        padding-top: clamp(3rem, 7vw, 5rem);
+      }
+
       .cv-card {
-        max-width: 23rem;
+        max-width: 27rem;
+        padding: 1.4rem;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(32, 32, 29, 0.05);
       }
 
-      .cv-card h3 {
-        text-transform: uppercase;
-        font-size: clamp(1rem, 1.7vw, 1.25rem);
-        line-height: 1.2;
-      }
-
-      .cv-card p {
-        margin-top: 0.55rem;
-        font-size: 0.88rem;
+      .cv-card p,
+      .cv-card strong,
+      .cv-card span {
+        display: block;
         font-weight: 700;
       }
 
-      .cv-card .role {
-        margin-top: 0.85rem;
-        color: #5c5c56;
+      .cv-card p {
+        margin: 0;
+        color: #777771;
+        font-size: 0.78rem;
+      }
+
+      .cv-card h3 {
+        margin: 1rem 0 0;
+        text-transform: uppercase;
+        font-size: clamp(1.05rem, 2vw, 1.35rem);
+        line-height: 1.15;
+      }
+
+      .cv-card strong {
+        margin-top: 0.35rem;
+        color: var(--blue);
+        font-size: 0.86rem;
+      }
+
+      .cv-card span {
+        margin-top: 1rem;
+        color: #53534d;
         font-size: 0.82rem;
+        line-height: 1.5;
       }
 
       .cv-card ul {
-        margin: 0.6rem 0 0;
+        margin: 1rem 0 0;
         padding-left: 1rem;
       }
 
       .cv-card li {
-        margin: 0.28rem 0;
-        font-size: 0.74rem;
-        line-height: 1.32;
+        margin: 0.4rem 0;
+        font-size: 0.76rem;
+        line-height: 1.45;
         font-weight: 700;
       }
 
       .protocol-inner {
-        min-height: 24rem;
-        padding: 4.25rem 0;
-      }
-
-      .protocol h2 {
-        text-align: center;
+        min-height: 30rem;
+        padding: 5rem 0;
       }
 
       .protocol-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
-        margin-top: 5.3rem;
+        gap: 0.9rem;
+        margin-top: clamp(2.2rem, 6vw, 4.5rem);
+      }
+
+      .protocol-grid article {
+        min-height: 15rem;
+        padding: 1.2rem;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.36);
+        border: 1px solid rgba(32, 32, 29, 0.06);
+      }
+
+      .protocol-grid h3 {
+        margin: 4rem 0 0;
+        font-size: 1.05rem;
+        line-height: 1.2;
       }
 
       .protocol-grid p {
-        min-height: 8rem;
-        padding: 1.15rem;
-        background: rgba(255, 255, 255, 0.24);
-        border: 1px solid rgba(32, 32, 29, 0.06);
-        border-radius: 0.75rem;
-        font-size: 0.8rem;
-        line-height: 1.45;
+        margin: 0.8rem 0 0;
+        color: #5c5c56;
+        font-size: 0.78rem;
+        line-height: 1.5;
         font-weight: 700;
       }
 
-      .protocol-grid span {
-        display: block;
-        margin-bottom: 1.2rem;
-        color: var(--soft);
-      }
-
-      @keyframes breathe {
+      @keyframes oval-breathe {
         0%,
         100% {
-          opacity: 0.25;
-          transform: scaleX(0.72) scaleY(0.86);
+          transform: scaleX(0.7) scaleY(0.84);
+          opacity: 0.45;
         }
-
         50% {
-          opacity: 0.7;
-          transform: scaleX(0.9) scaleY(0.96);
+          transform: scaleX(0.92) scaleY(0.98);
+          opacity: 0.9;
         }
       }
 
-      @media (max-width: 760px) {
-        .hero-grid {
+      @media (max-width: 900px) {
+        .hero-grid,
+        .contact-inner {
           grid-template-columns: 1fr;
         }
 
-        .motion {
-          min-height: 8.5rem;
+        .hero-side {
+          grid-template-columns: 1fr 1fr;
         }
 
-        .pill {
-          min-height: 3.95rem;
-          padding-inline: 1rem;
+        .signal {
+          grid-column: 1 / -1;
+          min-height: 12rem;
+        }
+
+        .proof,
+        .protocol-grid,
+        .heading {
+          grid-template-columns: 1fr;
         }
 
         .timeline::before,
@@ -474,13 +780,13 @@
         .axis {
           grid-column: 1;
           grid-row: 1;
-          justify-content: center;
           padding-top: 0.35rem;
         }
 
         .axis span {
           width: 1.45rem;
           height: 1.45rem;
+          font-size: 0;
         }
 
         .cell {
@@ -493,219 +799,296 @@
           display: none;
         }
 
-        .left-card,
-        .right-card {
+        .card-left,
+        .card-right,
+        .cv-card-right {
           justify-content: stretch;
+          padding-top: 0;
         }
 
-        .card {
-          width: 100%;
-          min-height: 12.8rem;
-        }
-
-        .mobile-year {
-          display: inline-block;
-          color: var(--soft);
-          font-size: 0.78rem;
-          font-weight: 700;
-        }
-
-        .cv {
-          padding-top: 5rem;
-        }
-
-        .center-title {
-          margin-bottom: 3rem;
-        }
-
+        .project-card,
         .cv-card {
+          width: 100%;
           max-width: none;
-        }
-
-        .protocol-grid {
-          grid-template-columns: 1fr;
-          margin-top: 3rem;
-        }
-
-        .protocol-inner {
-          min-height: auto;
         }
       }
 
-      @media (max-width: 430px) {
-        .pill-row {
-          gap: 0.6rem;
+      @media (max-width: 520px) {
+        .shell,
+        .section,
+        .contact-inner,
+        .protocol-inner {
+          width: min(100% - 1rem, 72rem);
         }
 
-        .pill {
-          font-size: 0.76rem;
-          border-radius: 0.65rem;
+        .nav {
+          align-items: flex-start;
         }
 
-        .claim {
-          font-size: 0.86rem;
+        .nav div {
+          gap: 0.15rem;
+        }
+
+        .nav div a,
+        .brand {
+          padding-inline: 0.62rem;
+        }
+
+        .statement {
+          min-height: 25rem;
+        }
+
+        .hero-side {
+          grid-template-columns: 1fr;
+        }
+
+        .proof div {
+          min-height: auto;
+        }
+
+        .facts div {
+          grid-template-columns: 1fr;
+          gap: 0.25rem;
+        }
+
+        .visual {
+          height: 10.5rem;
+        }
+
+        .contact h2 {
+          font-size: clamp(1.9rem, 13vw, 3.4rem);
         }
       }
     </style>
   </head>
   <body>
     <main>
-      <section class="hero">
-        <div class="wrap hero-grid">
+      <section class="hero shell">
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/" class="brand">Robert Kolek</a>
+          <div>
+            <a href="#projects">Work</a>
+            <a href="#cv">CV</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </nav>
+
+        <div class="hero-grid">
           <div class="hero-copy">
-            <div class="pill claim">I turn complexity into clarity.</div>
-            <div class="pill-row">
-              <div class="pill">Robert Kolek</div>
-              <div class="pill">product designer</div>
-            </div>
-            <div class="pill-row">
-              <div class="pill blue">currently @ESET</div>
-              <div class="pill green">previously @SkodaAuto</div>
+            <div class="pill headline">I turn complexity into clarity.</div>
+            <div class="statement">
+              <p class="eyebrow">Product designer for B2B systems, mobility, and data products</p>
+              <h1>Complex products, made calm enough to use.</h1>
+              <p>
+                I design the parts of digital products where logic, trust, and behavior meet:
+                setup flows, dashboards, decision states, and product systems.
+              </p>
             </div>
           </div>
-          <a class="motion" href="#projects">Animation</a>
+
+          <div class="hero-side">
+            <a href="#projects" class="signal" aria-label="Jump to projects">
+              <div class="orbit"><span></span><span></span><span></span></div>
+              <div><p>Selected work</p><strong>6 projects</strong></div>
+            </a>
+            <div class="pill blue">currently @ESET</div>
+            <div class="pill green">previously @SkodaAuto</div>
+          </div>
+        </div>
+
+        <div class="proof">
+          <div><span>01</span><strong>Enterprise UX</strong><p>Security flows, tables, dashboards, and cloud setup journeys.</p></div>
+          <div><span>02</span><strong>Mobility systems</strong><p>In-car interfaces, app concepts, and interaction prototypes.</p></div>
+          <div><span>03</span><strong>AI-assisted build</strong><p>Fast product storytelling from positioning to shipped interface.</p></div>
         </div>
       </section>
 
-      <section id="projects" class="wrap projects">
-        <h2 class="section-title">Projects</h2>
+      <section id="projects" class="projects section">
+        <div class="heading">
+          <p>Projects</p>
+          <h2>Not a gallery. A trail of solved complexity.</h2>
+        </div>
+
         <div class="timeline">
           <div class="row">
-            <div class="cell year-cell left-year"><span class="year">2026</span></div>
-            <div class="axis"><span></span></div>
-            <div class="cell right-card">
-              <article class="card">
-                <span class="mobile-year">2026</span>
-                <h3>Refresh of Data School Website</h3>
-                <p>2 months</p>
-                <div class="tags"><span class="tag">AI driven</span></div>
+            <div class="cell year-cell year-left"><span class="year">2026</span></div>
+            <div class="axis"><span>01</span></div>
+            <div class="cell card-right">
+              <article class="project-card" style="--accent:#246bff">
+                <div class="visual"><img src="images/projects/codebridge-college.png" alt="Data school website preview" /></div>
+                <div class="body">
+                  <div class="meta"><span>2026</span><span>2 months</span></div>
+                  <h3>Refresh of Data School Website</h3>
+                  <p>A redesign that moves an underground founder-led school into a more credible growth stage without losing its human voice.</p>
+                  <dl class="facts">
+                    <div><dt>Role</dt><dd>UX/UI, positioning, AI-assisted build</dd></div>
+                    <div><dt>Outcome</dt><dd>Warmer trust layer for students and corporate buyers</dd></div>
+                  </dl>
+                  <div class="tags"><span class="tag">AI driven</span><span class="tag">education</span><span class="tag">web</span></div>
+                </div>
               </article>
             </div>
           </div>
 
           <div class="row">
-            <div class="cell left-card">
-              <article class="card">
-                <span class="mobile-year">2025</span>
-                <h3>Cloud workload protection module in enterprise product</h3>
-                <p>12 months</p>
-                <div class="tags"><span class="tag">@ESET</span><span class="tag">B2B</span></div>
+            <div class="cell card-left">
+              <article class="project-card" style="--accent:#2e766e">
+                <div class="visual abstract"><span class="line"></span><span class="line short"></span><span class="chip">flow</span><span class="chip ghost">state</span></div>
+                <div class="body">
+                  <div class="meta"><span>2025</span><span>12 months</span></div>
+                  <h3>Cloud workload protection module in enterprise product</h3>
+                  <p>A complex security workflow translated into guided setup, explicit checkpoints, and reusable states for technical users.</p>
+                  <dl class="facts">
+                    <div><dt>Role</dt><dd>Enterprise UX, setup flows, systems thinking</dd></div>
+                    <div><dt>Outcome</dt><dd>Clearer adoption path for Azure, AWS, and GCP protection</dd></div>
+                  </dl>
+                  <div class="tags"><span class="tag">@ESET</span><span class="tag">B2B</span><span class="tag">security</span></div>
+                </div>
               </article>
             </div>
-            <div class="axis"><span></span></div>
-            <div class="cell year-cell right-year"><span class="year">2025</span></div>
+            <div class="axis"><span>02</span></div>
+            <div class="cell year-cell year-right"><span class="year">2025</span></div>
           </div>
 
           <div class="row">
-            <div class="cell year-cell left-year"><span class="year">2024</span></div>
-            <div class="axis"><span></span></div>
-            <div class="cell right-card">
-              <article class="card">
-                <span class="mobile-year">2024</span>
-                <h3>Skoda EcoShift app</h3>
-                <p>4 months</p>
-                <div class="tags"><span class="tag">internship</span><span class="tag">app</span></div>
-              </article>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="cell left-card">
-              <article class="card">
-                <span class="mobile-year">2024</span>
-                <h3>Codebridge College</h3>
-                <p>2 months</p>
-                <div class="tags"><span class="tag">start-up</span><span class="tag">branding</span></div>
-              </article>
-            </div>
-            <div class="axis"><span></span></div>
-            <div class="cell year-cell right-year"><span class="year">2024</span></div>
-          </div>
-
-          <div class="row">
-            <div class="cell year-cell left-year"><span class="year">2022</span></div>
-            <div class="axis"><span></span></div>
-            <div class="cell right-card">
-              <article class="card">
-                <span class="mobile-year">2022</span>
-                <h3>Healthapp</h3>
-                <p>48 hours</p>
-                <div class="tags"><span class="tag">hackathon</span></div>
+            <div class="cell year-cell year-left"><span class="year">2024</span></div>
+            <div class="axis"><span>03</span></div>
+            <div class="cell card-right">
+              <article class="project-card" style="--accent:#f39bd8">
+                <div class="visual"><img src="images/projects/skoda-app.png" alt="Skoda EcoShift app preview" /></div>
+                <div class="body">
+                  <div class="meta"><span>2024</span><span>4 months</span></div>
+                  <h3>Skoda EcoShift app</h3>
+                  <p>A companion app concept that reframes eco-driving from abstract sustainability into personal financial progress.</p>
+                  <dl class="facts">
+                    <div><dt>Role</dt><dd>Mobile UX/UI, prototyping, mobility concept</dd></div>
+                    <div><dt>Outcome</dt><dd>Personal savings and CO2 impact made visible per ride</dd></div>
+                  </dl>
+                  <div class="tags"><span class="tag">internship</span><span class="tag">app</span><span class="tag">mobility</span></div>
+                </div>
               </article>
             </div>
           </div>
 
           <div class="row">
-            <div class="cell left-card">
-              <article class="card">
-                <span class="mobile-year">2022</span>
-                <h3>Bratislava app</h3>
-                <p>48 hours</p>
-                <div class="tags"><span class="tag">hackathon</span></div>
+            <div class="cell card-left">
+              <article class="project-card" style="--accent:#246bff">
+                <div class="visual"><img src="images/projects/codebridge-college-alt.png" alt="Codebridge brand preview" /></div>
+                <div class="body">
+                  <div class="meta"><span>2024</span><span>2 months</span></div>
+                  <h3>Codebridge College</h3>
+                  <p>A brand and web layer for a small school that needed to feel practical, personal, and ready to scale.</p>
+                  <dl class="facts">
+                    <div><dt>Role</dt><dd>Brand system, web UI, launch support</dd></div>
+                    <div><dt>Outcome</dt><dd>A sharper identity system for a young data education brand</dd></div>
+                  </dl>
+                  <div class="tags"><span class="tag">start-up</span><span class="tag">branding</span><span class="tag">web</span></div>
+                </div>
               </article>
             </div>
-            <div class="axis"><span></span></div>
-            <div class="cell year-cell right-year"><span class="year">2022</span></div>
+            <div class="axis"><span>04</span></div>
+            <div class="cell year-cell year-right"><span class="year">2024</span></div>
+          </div>
+
+          <div class="row">
+            <div class="cell year-cell year-left"><span class="year">2022</span></div>
+            <div class="axis"><span>05</span></div>
+            <div class="cell card-right">
+              <article class="project-card" style="--accent:#f39bd8">
+                <div class="visual abstract"><span class="line"></span><span class="line short"></span><span class="chip">48h</span><span class="chip ghost">health</span></div>
+                <div class="body">
+                  <div class="meta"><span>2022</span><span>48 hours</span></div>
+                  <h3>Healthapp</h3>
+                  <p>A compressed sprint focused on turning a health-service idea into a coherent mobile journey quickly.</p>
+                  <dl class="facts">
+                    <div><dt>Role</dt><dd>Hackathon UX/UI</dd></div>
+                    <div><dt>Outcome</dt><dd>Fast concept validation under time pressure</dd></div>
+                  </dl>
+                  <div class="tags"><span class="tag">hackathon</span><span class="tag">health</span></div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="cell card-left">
+              <article class="project-card" style="--accent:#2e766e">
+                <div class="visual abstract"><span class="line"></span><span class="line short"></span><span class="chip">city</span><span class="chip ghost">service</span></div>
+                <div class="body">
+                  <div class="meta"><span>2022</span><span>48 hours</span></div>
+                  <h3>Bratislava app</h3>
+                  <p>A civic product exercise around helping people orient through urban services with less friction.</p>
+                  <dl class="facts">
+                    <div><dt>Role</dt><dd>Hackathon concept and interface</dd></div>
+                    <div><dt>Outcome</dt><dd>City-service concept shaped into a scannable app flow</dd></div>
+                  </dl>
+                  <div class="tags"><span class="tag">hackathon</span><span class="tag">city</span></div>
+                </div>
+              </article>
+            </div>
+            <div class="axis"><span>06</span></div>
+            <div class="cell year-cell year-right"><span class="year">2022</span></div>
           </div>
         </div>
+
         <p class="more">
-          more projects on
+          more visual work on
           <a href="https://www.behance.net/robertkolek" target="_blank" rel="noreferrer">Behance</a>
         </p>
       </section>
 
-      <section class="contact" id="contact">
-        <div class="wrap contact-inner">
-          <p>Got project in mind?</p>
-          <h2>Lets talk!</h2>
-          <a class="email" href="mailto:robert.kolek98@gmail.com">robert.kolek98@gmail.com</a>
-          <div class="socials">
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://www.behance.net/robertkolek" target="_blank" rel="noreferrer">Behance</a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+      <section id="contact" class="contact">
+        <div class="contact-inner">
+          <div>
+            <p class="eyebrow">Open to focused product work</p>
+            <h2>Bring me the messy flow, the unclear dashboard, or the product surface nobody wants to touch.</h2>
+          </div>
+          <div class="contact-actions">
+            <a class="email" href="mailto:robert.kolek98@gmail.com">robert.kolek98@gmail.com</a>
+            <div class="socials">
+              <a href="https://www.behance.net/robertkolek" target="_blank" rel="noreferrer">Behance</a>
+              <a href="https://github.com/robertkolek-cyber" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="wrap cv">
-        <div class="center-title">
+      <section id="cv" class="cv section">
+        <div class="heading center">
           <p>My CV</p>
-          <h2>Corporations</h2>
+          <h2>Corporations with real constraints.</h2>
         </div>
         <div class="cv-timeline">
           <div class="cv-row">
-            <div class="cell left-card">
+            <div class="cell card-left">
               <article class="cv-card">
+                <p>Full time since 07/24</p>
                 <h3>ESET cybersecurity</h3>
-                <p>full time since 07/24</p>
-                <p class="role">Product designer</p>
+                <strong>Product designer</strong>
+                <span>B2B security products for small and medium businesses</span>
                 <ul>
-                  <li>Responsible for two major projects</li>
-                  <li>Main domain B2B products for small/medium businesses</li>
-                  <li>Designing of core flows, user interfaces such as dashboards and tables</li>
-                  <li>Collaboratively iterating designs with other teams</li>
-                  <li>Validating designs through usability testing and analytics</li>
+                  <li>Own core flows for dashboards, tables, and enterprise product surfaces</li>
+                  <li>Shape complex setup journeys with product managers and engineering teams</li>
+                  <li>Validate interaction decisions through usability testing and analytics</li>
                 </ul>
               </article>
             </div>
-            <div class="axis"><span></span></div>
+            <div class="axis"><span>01</span></div>
             <div class="cell empty"></div>
           </div>
-
           <div class="cv-row">
             <div class="cell empty"></div>
-            <div class="axis"><span></span></div>
-            <div class="cell right-card">
+            <div class="axis"><span>02</span></div>
+            <div class="cell card-right cv-card-right">
               <article class="cv-card">
-                <h3>Skoda Auto</h3>
                 <p>16 months internship</p>
-                <p class="role">UX/UI designer</p>
+                <h3>Skoda Auto</h3>
+                <strong>UX/UI designer</strong>
+                <span>Digital instrument cluster, infotainment, and electromobility concepts</span>
                 <ul>
-                  <li>Main domain digital instrument cluster and infotainment</li>
-                  <li>Collaborating on a new app for electromobility</li>
-                  <li>Interaction proposals for the new generation of vehicles</li>
-                  <li>Diploma thesis</li>
-                  <li>UX/UI lookfeel for the concept show car</li>
+                  <li>Designed interaction proposals for a new generation of vehicles</li>
+                  <li>Collaborated on an electromobility app concept and show-car lookfeel</li>
+                  <li>Connected diploma thesis work with production-facing design exploration</li>
                 </ul>
               </article>
             </div>
@@ -714,12 +1097,15 @@
       </section>
 
       <section class="protocol">
-        <div class="wrap protocol-inner">
-          <h2>My protocol</h2>
+        <div class="protocol-inner">
+          <div class="heading center">
+            <p>My protocol</p>
+            <h2>How I keep complex work moving.</h2>
+          </div>
           <div class="protocol-grid">
-            <p><span>01</span>Map the system before the screen</p>
-            <p><span>02</span>Prototype the risky interaction first</p>
-            <p><span>03</span>Make handoff readable for engineers</p>
+            <article><span>01</span><h3>Map the system</h3><p>I start by naming actors, states, constraints, and failure paths so the interface is solving the real knot.</p></article>
+            <article><span>02</span><h3>Prototype the risk</h3><p>The first prototype is for the part that can break trust: setup, decision points, handoff, or re-entry.</p></article>
+            <article><span>03</span><h3>Make it shippable</h3><p>I turn the chosen direction into readable flows, states, specs, and feedback loops for the team.</p></article>
           </div>
         </div>
       </section>
